@@ -6,7 +6,7 @@ services:
       - "5432:5432"
     environment:
       POSTGRES_USER: saku_user
-      POSTGRES_PASSWORD: saku_password
+      POSTGRES_PASSWORD: LhknrYiY
       POSTGRES_DB: saku_app
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro

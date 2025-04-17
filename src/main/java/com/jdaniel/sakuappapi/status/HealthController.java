@@ -1,4 +1,4 @@
-package com.jdaniel.sakuappapi.controller;
+package com.jdaniel.sakuappapi.status;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,4 +18,5 @@ public class HealthController {
                 "This is a health check endpoint for the SakuApp API.\n" +
                 "If you see this message, the API is running.";
     }
+
 }
