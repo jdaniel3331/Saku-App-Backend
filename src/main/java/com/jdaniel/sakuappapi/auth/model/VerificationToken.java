@@ -1,10 +1,18 @@
 package com.jdaniel.sakuappapi.auth.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 @Entity
 @Table(name = "verification_tokens", schema = "authentication")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class VerificationToken {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

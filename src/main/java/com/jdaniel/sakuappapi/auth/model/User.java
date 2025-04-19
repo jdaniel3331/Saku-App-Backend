@@ -41,4 +41,6 @@ public class User {
     private List<AccessToken> accessTokens;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<VerificationToken> verificationTokens;
+
+    //TODO: Preguntar cómo agregar nuevas categorías a la tabla de categorías.
 }
