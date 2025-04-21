@@ -1,5 +1,6 @@
 package com.jdaniel.sakuappapi.task.model;
 
+import com.jdaniel.sakuappapi.auth.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -38,4 +39,8 @@ public class Task {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "priority_level", nullable = false)
     private PriorityLevel priorityLevel;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }

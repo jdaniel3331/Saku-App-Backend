@@ -1,6 +1,7 @@
 package com.jdaniel.sakuappapi.auth.model;
 
 import com.jdaniel.sakuappapi.task.model.Category;
+import com.jdaniel.sakuappapi.task.model.Task;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -44,6 +45,8 @@ public class User {
     private List<VerificationToken> verificationTokens;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Category> categories;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Task> tasks;
 
-    //TODO: Preguntar cómo agregar nuevas categorías a la tabla de categorías.
+    //TODO: Cómo manejar la relación con las tareas
 }
