@@ -8,6 +8,4 @@ services:
       POSTGRES_USER: saku_user
       POSTGRES_PASSWORD: LhknrYiY
       POSTGRES_DB: saku_app
-    volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     restart: unless-stopped

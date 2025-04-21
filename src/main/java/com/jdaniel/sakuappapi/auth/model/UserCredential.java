@@ -8,22 +8,23 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 @Entity
-@Table(name = "users_credentials", schema = "authentication")
+@Table(name = "user_credentials", schema = "authentication")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 public class UserCredential {
     @Id
-    @Column(name = "user_id")
-    private Long userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "credential_id")
+    private Long credentialId;
     @Column(name = "email", unique = true, nullable = false)
     private String email;
     @Column(name = "password", nullable = false)
     private String password;
     @Column(name = "was_verified", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean wasVerified;
-    @Column(name = "last_login", nullable = false)
+    @Column(name = "last_login")
     private LocalDateTime lastLogin;
     @OneToOne
     @MapsId

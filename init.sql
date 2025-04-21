@@ -1,2 +1,0 @@
-CREATE SCHEMA authentication AUTHORIZATION saku_user;
-CREATE SCHEMA task AUTHORIZATION saku_user;
