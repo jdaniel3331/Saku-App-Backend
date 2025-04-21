@@ -79,6 +79,10 @@ CREATE TABLE task.tasks (
     category BIGSERIAL,
     task_state SMALLINT NOT NULL,
     priority_level SMALLINT NOT NULL,
+    user_id BIGINT NOT NULL,
+    FOREIGN KEY (user_id)
+        REFERENCES authentication.users_info(user_id)
+        ON DELETE CASCADE,
     FOREIGN KEY (category) REFERENCES task.categories(category_id) ON DELETE RESTRICT,
     FOREIGN KEY (task_state) REFERENCES task.task_states(task_id) ON DELETE CASCADE,
     FOREIGN KEY (priority_level) REFERENCES task.priority_levels(priority_level_id) ON DELETE CASCADE
