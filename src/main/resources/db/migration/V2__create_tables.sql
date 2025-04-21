@@ -49,8 +49,12 @@ CREATE TABLE authentication.verification_tokens (
 
 -- Tabla de categorías de tareas
 CREATE TABLE task.categories (
-    category_id SMALLSERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
+    category_id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    user_id BIGINT,
+    FOREIGN KEY (user_id)
+        REFERENCES authentication.users_info(user_id)
+        ON DELETE CASCADE
 );
 
 -- Tabla de niveles de prioridad
@@ -72,10 +76,10 @@ CREATE TABLE task.tasks (
     description TEXT,
     created_at DATE NOT NULL,
     due_date DATE,
-    category SMALLINT NOT NULL,
+    category BIGSERIAL,
     task_state SMALLINT NOT NULL,
     priority_level SMALLINT NOT NULL,
-    FOREIGN KEY (category) REFERENCES task.categories(category_id) ON DELETE CASCADE,
+    FOREIGN KEY (category) REFERENCES task.categories(category_id) ON DELETE RESTRICT,
     FOREIGN KEY (task_state) REFERENCES task.task_states(task_id) ON DELETE CASCADE,
     FOREIGN KEY (priority_level) REFERENCES task.priority_levels(priority_level_id) ON DELETE CASCADE
 );

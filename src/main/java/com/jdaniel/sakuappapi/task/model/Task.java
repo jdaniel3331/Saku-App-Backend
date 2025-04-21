@@ -28,7 +28,7 @@ public class Task {
     private LocalDate dueDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category", nullable = false)
+    @JoinColumn(name = "category")
     private Category category;
 
     @ManyToOne(fetch = FetchType.LAZY)
