@@ -15,7 +15,7 @@ public class AuthController {
     @Autowired
     private AuthServiceImpl authService;
 
-    @PostMapping("/sign-up")
+    @PostMapping("/register")
     public ResponseEntity<ApiResponse> signIn(@RequestBody @Valid RegisterRequest registerRequest) {
         ApiResponse response = new ApiResponse(HttpStatus.CREATED.name(),authService.register(registerRequest), HttpStatus.CREATED.value());
         return new ResponseEntity<>(response, HttpStatus.CREATED);
