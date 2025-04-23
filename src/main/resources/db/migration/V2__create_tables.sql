@@ -51,7 +51,7 @@ CREATE TABLE authentication.verification_tokens (
 CREATE TABLE task.categories (
     category_id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    user_id BIGINT,
+    user_id BIGINT NOT NULL,
     FOREIGN KEY (user_id)
         REFERENCES authentication.users_info(user_id)
         ON DELETE CASCADE
@@ -80,6 +80,10 @@ CREATE TABLE task.tasks (
     task_state SMALLINT NOT NULL,
     priority_level SMALLINT NOT NULL,
     user_id BIGINT NOT NULL,
+    parent_task_is BIGINT,
+    FOREIGN KEY (parent_task_is)
+        REFERENCES task.tasks(task_id)
+        ON DELETE CASCADE,
     FOREIGN KEY (user_id)
         REFERENCES authentication.users_info(user_id)
         ON DELETE CASCADE,

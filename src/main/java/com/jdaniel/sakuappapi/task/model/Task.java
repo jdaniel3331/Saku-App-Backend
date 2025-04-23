@@ -21,11 +21,11 @@ public class Task {
     private Long taskId;
     @Column(name = "title", nullable = false)
     private String title;
-    @Column(name = "description", nullable = true)
+    @Column(name = "description")
     private String description;
     @Column(name = "created_at", nullable = false)
     private LocalDate cratedAt;
-    @Column(name = "due_date", nullable = true)
+    @Column(name = "due_date")
     private LocalDate dueDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
