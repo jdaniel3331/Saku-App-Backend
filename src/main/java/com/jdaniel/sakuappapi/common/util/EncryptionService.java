@@ -1,4 +1,4 @@
-package com.jdaniel.sakuappapi.util;
+package com.jdaniel.sakuappapi.common.util;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCrypt;

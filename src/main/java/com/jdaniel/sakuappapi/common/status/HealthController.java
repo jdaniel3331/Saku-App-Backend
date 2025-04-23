@@ -1,4 +1,4 @@
-package com.jdaniel.sakuappapi.status;
+package com.jdaniel.sakuappapi.common.status;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
