@@ -1,0 +1,11 @@
+Ejemplo de peticion de registro de usuario
+
+{
+  "firstName": "John",
+  "secondName": "Michael",
+  "firstSurname": "Doe",
+  "secondSurname": "Smith",
+  "dateOfBirth": "1990-05-15",
+  "email": "john.doe@example.com",
+  "password": "securePassword123"
+}

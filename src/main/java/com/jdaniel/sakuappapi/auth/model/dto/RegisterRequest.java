@@ -1,5 +1,6 @@
 package com.jdaniel.sakuappapi.auth.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -10,13 +11,18 @@ import java.time.LocalDate;
 public record RegisterRequest (
         @NotNull
         @NotBlank
+        @JsonProperty("first_name")
         String firstName,
+        @JsonProperty("second_name")
         String secondName,
         @NotNull
         @NotBlank
+        @JsonProperty("first_surname")
         String firstSurname,
+        @JsonProperty("second_surname")
         String secondSurname,
         @NotNull
+        @JsonProperty("date_of_birth")
         LocalDate dateOfBirth,
         @NotNull
         @NotBlank
