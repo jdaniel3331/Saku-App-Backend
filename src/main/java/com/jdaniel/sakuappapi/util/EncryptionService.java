@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EncryptionService implements PasswordEncoder {
-    @Value("${encryption.salt.rounds}")
+    @Value("${encription.salt.rounds}")
     private int saltRounds;
 
     @Override

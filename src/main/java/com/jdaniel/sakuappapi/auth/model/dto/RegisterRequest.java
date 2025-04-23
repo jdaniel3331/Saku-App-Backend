@@ -17,7 +17,6 @@ public record RegisterRequest (
         String firstSurname,
         String secondSurname,
         @NotNull
-        @NotBlank
         LocalDate dateOfBirth,
         @NotNull
         @NotBlank
