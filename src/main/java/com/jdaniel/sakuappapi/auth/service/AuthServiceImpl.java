@@ -5,7 +5,9 @@ import com.jdaniel.sakuappapi.auth.model.UserCredential;
 import com.jdaniel.sakuappapi.auth.model.dto.RegisterRequest;
 import com.jdaniel.sakuappapi.auth.repository.UserCredentialRepository;
 import com.jdaniel.sakuappapi.auth.repository.UserRepository;
+import com.jdaniel.sakuappapi.common.exception.RequestException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +25,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public String register(RegisterRequest registerRequest) {
         if(userCredentialRepository.existsByEmailIgnoreCase(registerRequest.email())) {
-            return "El usuario ya se encuentra registrado";
+            throw new RequestException(HttpStatus.CONFLICT.name(), "El usuario "+registerRequest.email()+" ya se encuentra registrado", HttpStatus.CONFLICT.value());
         }
 
         User newUser = new User();
