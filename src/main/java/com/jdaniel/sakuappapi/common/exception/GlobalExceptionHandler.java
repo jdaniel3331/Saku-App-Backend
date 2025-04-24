@@ -20,4 +20,9 @@ public class GlobalExceptionHandler {
         ApiResponse error = new ApiResponse(HttpStatus.BAD_REQUEST.name(), ex.getMessage(), HttpStatus.BAD_REQUEST.value());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(value = NotFoundedException.class)
+    public ResponseEntity<ApiResponse> handleNotFoundedException(NotFoundedException e) {
+        ApiResponse response = new ApiResponse(e.getStatus(), e.getMessage(), e.getCode());
+        return new ResponseEntity<>(response, HttpStatus.valueOf(e.getCode()));
+    }
 }
