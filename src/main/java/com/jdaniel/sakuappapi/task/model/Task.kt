@@ -1,46 +1,50 @@
-package com.jdaniel.sakuappapi.task.model;
+package com.jdaniel.sakuappapi.task.model
 
-import com.jdaniel.sakuappapi.auth.model.User;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.jdaniel.sakuappapi.auth.model.User
+import jakarta.persistence.*
+import lombok.AllArgsConstructor
+import lombok.Getter
+import lombok.NoArgsConstructor
+import lombok.Setter
+import java.time.LocalDate
 
-import java.time.LocalDate;
 @Entity
 @Table(name = "tasks", schema = "task")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Task {
+class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_id", unique = true, nullable = false)
-    private Long taskId;
+    private var taskId: Long? = null
+
     @Column(name = "title", nullable = false)
-    private String title;
+    private var title: String? = null
+
     @Column(name = "description")
-    private String description;
+    private var description: String? = null
+
     @Column(name = "created_at", nullable = false)
-    private LocalDate cratedAt;
+    private var cratedAt: LocalDate? = null
+
     @Column(name = "due_date")
-    private LocalDate dueDate;
+    private var dueDate: LocalDate? = null
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category")
-    private Category category;
+    private var category: Category? = null
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_state", nullable = false)
-    private TaskState taskState;
+    private var taskState: TaskState? = null
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "priority_level", nullable = false)
-    private PriorityLevel priorityLevel;
+    private var priorityLevel: PriorityLevel? = null
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private var user: User? = null
 }
