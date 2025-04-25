@@ -29,9 +29,6 @@ class TaskServiceImpl: TaskService {
 
     override fun createTask(task: TaskDto): String {
 
-        val category = categoryRepository?.findById(task.category)?.orElse(null)
-        if (category == null) throw NotFoundedException("Category not found", HttpStatus.NOT_FOUND.name,HttpStatus.NOT_FOUND.value())
-
         val priorityLevel = priorityLevelRepository?.findById(task.priorityLevel)?.orElse(null)
         if (priorityLevel == null) throw NotFoundedException("Priority level not found", HttpStatus.NOT_FOUND.name,HttpStatus.NOT_FOUND.value())
 
@@ -43,7 +40,7 @@ class TaskServiceImpl: TaskService {
         newTask.description = task.description
         newTask.dueDate = task.dueDate
         newTask.cratedAt = LocalDate.now()
-        newTask.category = category
+        newTask.category = task.category.let { categoryRepository?.findById(it)?.orElse(null) }
         newTask.priorityLevel = priorityLevel
         newTask.taskState = taskStateRepository?.findById(1)?.orElse(null)
         newTask.user = user
