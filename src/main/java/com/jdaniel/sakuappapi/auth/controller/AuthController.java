@@ -19,5 +19,7 @@ public class AuthController {
     public ResponseEntity<ApiResponse> signIn(@RequestBody @Valid RegisterRequest registerRequest) {
         ApiResponse response = new ApiResponse(HttpStatus.CREATED.name(),authService.register(registerRequest), HttpStatus.CREATED.value());
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+
+        //TODO: bajo acoplamiento entre auth y user
     }
 }

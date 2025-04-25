@@ -1,8 +1,7 @@
 package com.jdaniel.sakuappapi.task.service
 
-import com.jdaniel.sakuappapi.auth.repository.UserRepository
+import com.jdaniel.sakuappapi.user.repository.UserRepository
 import com.jdaniel.sakuappapi.common.exception.NotFoundedException
-import com.jdaniel.sakuappapi.task.model.PriorityLevel
 import com.jdaniel.sakuappapi.task.model.Task
 import com.jdaniel.sakuappapi.task.model.dto.TaskDto
 import com.jdaniel.sakuappapi.task.repository.CategoryRepository

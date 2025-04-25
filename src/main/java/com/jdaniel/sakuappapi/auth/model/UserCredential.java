@@ -1,5 +1,6 @@
 package com.jdaniel.sakuappapi.auth.model;
 
+import com.jdaniel.sakuappapi.user.model.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,10 +1,10 @@
 package com.jdaniel.sakuappapi.auth.service;
 
-import com.jdaniel.sakuappapi.auth.model.User;
+import com.jdaniel.sakuappapi.user.model.User;
 import com.jdaniel.sakuappapi.auth.model.UserCredential;
 import com.jdaniel.sakuappapi.auth.model.dto.RegisterRequest;
 import com.jdaniel.sakuappapi.auth.repository.UserCredentialRepository;
-import com.jdaniel.sakuappapi.auth.repository.UserRepository;
+import com.jdaniel.sakuappapi.user.repository.UserRepository;
 import com.jdaniel.sakuappapi.common.exception.RequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

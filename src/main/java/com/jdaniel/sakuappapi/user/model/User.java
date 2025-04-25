@@ -1,5 +1,8 @@
-package com.jdaniel.sakuappapi.auth.model;
+package com.jdaniel.sakuappapi.user.model;
 
+import com.jdaniel.sakuappapi.auth.model.AccessToken;
+import com.jdaniel.sakuappapi.auth.model.UserCredential;
+import com.jdaniel.sakuappapi.auth.model.VerificationToken;
 import com.jdaniel.sakuappapi.task.model.Category;
 import com.jdaniel.sakuappapi.task.model.Task;
 import jakarta.persistence.*;
