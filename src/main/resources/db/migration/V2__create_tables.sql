@@ -76,12 +76,12 @@ CREATE TABLE task.tasks (
     description TEXT,
     created_at DATE NOT NULL,
     due_date DATE,
-    category BIGSERIAL,
+    category BIGINT,
     task_state SMALLINT NOT NULL,
     priority_level SMALLINT NOT NULL,
     user_id BIGINT NOT NULL,
-    parent_task_is BIGINT,
-    FOREIGN KEY (parent_task_is)
+    parent_task_id BIGINT,
+    FOREIGN KEY (parent_task_id)
         REFERENCES task.tasks(task_id)
         ON DELETE CASCADE,
     FOREIGN KEY (user_id)
