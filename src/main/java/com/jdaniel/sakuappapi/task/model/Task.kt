@@ -30,6 +30,7 @@ class Task() {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_state", nullable = false)
+
     var taskState: TaskState? = null
 
     @ManyToOne(fetch = FetchType.LAZY)

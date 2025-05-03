@@ -15,11 +15,11 @@ import lombok.Setter
 class PriorityLevel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private var priorityLevelId: Short? = null
+    var priorityLevelId: Short? = null
 
     @Column(name = "level", nullable = false)
-    private var level: String? = null
+    var level: String? = null
 
     @OneToMany(mappedBy = "priorityLevel", cascade = [CascadeType.ALL], orphanRemoval = true)
-    private var tasks: MutableList<Task?>? = null
+    var tasks: MutableList<Task?>? = null
 }

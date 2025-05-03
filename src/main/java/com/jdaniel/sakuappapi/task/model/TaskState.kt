@@ -15,9 +15,9 @@ import lombok.Setter
 class TaskState {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private var taskId: Short? = null
-    private var state: String? = null
+    var taskStateId: Short? = null
+    var state: String? = null
 
     @OneToMany(mappedBy = "taskState", cascade = [CascadeType.ALL], orphanRemoval = true)
-    private var tasks: MutableList<Task?>? = null
+    var tasks: MutableList<Task?>? = null
 }

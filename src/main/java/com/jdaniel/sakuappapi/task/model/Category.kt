@@ -16,13 +16,13 @@ import lombok.Setter
 class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private var categoryId: Short? = null
-    private var name: String? = null
+    var categoryId: Long? = null
+    var name: String? = null
 
     @OneToMany(mappedBy = "category", cascade = [CascadeType.ALL], orphanRemoval = true)
-    private var tasks: MutableList<Task?>? = null
+    var tasks: MutableList<Task?>? = null
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private var user: User? = null
+    var user: User? = null
 }
