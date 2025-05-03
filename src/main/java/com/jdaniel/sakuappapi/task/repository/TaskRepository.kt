@@ -4,10 +4,14 @@ import com.jdaniel.sakuappapi.user.model.User
 import com.jdaniel.sakuappapi.task.model.Task
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
+import org.springframework.transaction.annotation.Transactional
 
 @Repository
 interface TaskRepository: JpaRepository<Task, Long> {
 
     //get tasks by userId
     fun getTasksByUser(user: User): List<Task>
+    fun existsByTaskId(taskId: Long): Boolean
+    @Transactional
+    fun deleteByTaskId(taskId: Long)
 }
