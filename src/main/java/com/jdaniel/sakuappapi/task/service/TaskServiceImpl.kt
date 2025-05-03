@@ -59,11 +59,10 @@ class TaskServiceImpl: TaskService {
         if (tasks.isNullOrEmpty()) throw NotFoundedException("User has no tasks", HttpStatus.NOT_FOUND.name,HttpStatus.NOT_FOUND.value())
 
         for (task in tasks) {
-            //TODO: manejar datos nulos
             val taskDto = TaskDto(
                 taskId = task.taskId!!,
                 title = task.title!!,
-                description = task.description,
+                description = task.description?: "",
                 createdAt = task.cratedAt!!,
                 dueDate = task.dueDate,
                 category = task.category?.categoryId,
@@ -77,4 +76,13 @@ class TaskServiceImpl: TaskService {
 
     }
 
+    override fun deteleTask(taskId: Long): String {
+        val isTaskPresent = taskRepository?.existsByTaskId(taskId)
+        if (isTaskPresent == false) throw NotFoundedException("Task not found", HttpStatus.NOT_FOUND.name,HttpStatus.NOT_FOUND.value())
+
+        taskRepository?.deleteByTaskId(taskId)
+
+        return "Task deleted successfully"
+
+    }
 }
