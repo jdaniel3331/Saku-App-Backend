@@ -52,7 +52,7 @@ class TaskController {
 
         val response = ApiResponse<String>(
             HttpStatus.OK.name,
-            taskService?.deteleTask(taskId),
+            taskService?.deleteTask(taskId),
             HttpStatus.OK.value()
         )
         return ResponseEntity(response, HttpStatus.OK)

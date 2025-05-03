@@ -76,7 +76,7 @@ class TaskServiceImpl: TaskService {
 
     }
 
-    override fun deteleTask(taskId: Long): String {
+    override fun deleteTask(taskId: Long): String {
         val isTaskPresent = taskRepository?.existsByTaskId(taskId)
         if (isTaskPresent == false) throw NotFoundedException("Task not found", HttpStatus.NOT_FOUND.name,HttpStatus.NOT_FOUND.value())
 

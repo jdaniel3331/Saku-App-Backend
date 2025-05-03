@@ -7,7 +7,7 @@ interface TaskService {
 
     fun createTask(task: CreateTaskDto): String
     fun getAllTasks(userId: Long): List<TaskDto>
-    fun deteleTask(taskId: Long): String
+    fun deleteTask(taskId: Long): String
     fun changeTaskTitle(taskId: Long, newTitle: String): String
 
 }
