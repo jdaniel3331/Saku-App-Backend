@@ -85,4 +85,13 @@ class TaskServiceImpl: TaskService {
         return "Task deleted successfully"
 
     }
+
+    override fun changeTaskTitle(taskId: Long, newTitle: String): String {
+        val isTaskPresent = taskRepository?.existsByTaskId(taskId)
+        if (isTaskPresent == false) throw NotFoundedException("Task not found", HttpStatus.NOT_FOUND.name,HttpStatus.NOT_FOUND.value())
+
+        taskRepository?.updateTitleByTaskId(newTitle, taskId)
+
+        return "Task title updated successfully"
+    }
 }
