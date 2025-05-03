@@ -3,6 +3,7 @@ package com.jdaniel.sakuappapi.task.service
 import com.jdaniel.sakuappapi.user.repository.UserRepository
 import com.jdaniel.sakuappapi.common.exception.NotFoundedException
 import com.jdaniel.sakuappapi.task.model.Task
+import com.jdaniel.sakuappapi.task.model.dto.CreateTaskDto
 import com.jdaniel.sakuappapi.task.model.dto.TaskDto
 import com.jdaniel.sakuappapi.task.repository.CategoryRepository
 import com.jdaniel.sakuappapi.task.repository.PriorityLevelRepository
@@ -26,7 +27,7 @@ class TaskServiceImpl: TaskService {
     @Autowired
     private val userRepository: UserRepository? = null
 
-    override fun createTask(task: TaskDto): String {
+    override fun createTask(task: CreateTaskDto): String {
 
         val priorityLevel = priorityLevelRepository?.findById(task.priorityLevel)?.orElse(null)
         if (priorityLevel == null) throw NotFoundedException("Priority level not found", HttpStatus.NOT_FOUND.name,HttpStatus.NOT_FOUND.value())
@@ -48,4 +49,32 @@ class TaskServiceImpl: TaskService {
 
         return "Task ${savedTask?.title} created successfully"
     }
+
+    override fun getAllTasks(userId: Long): List<TaskDto> {
+        val mapedTasks = mutableListOf<TaskDto>()
+        val user = userRepository?.findById(userId)?.orElse(null)
+        if (user == null) throw NotFoundedException("User not found", HttpStatus.NOT_FOUND.name,HttpStatus.NOT_FOUND.value())
+
+        val tasks = taskRepository?.getTasksByUser(user)
+        if (tasks.isNullOrEmpty()) throw NotFoundedException("User has no tasks", HttpStatus.NOT_FOUND.name,HttpStatus.NOT_FOUND.value())
+
+        for (task in tasks) {
+            //TODO: manejar datos nulos
+            val taskDto = TaskDto(
+                taskId = task.taskId!!,
+                title = task.title!!,
+                description = task.description,
+                createdAt = task.cratedAt!!,
+                dueDate = task.dueDate,
+                category = task.category?.categoryId,
+                taskState = task.taskState?.taskStateId!!,
+                priorityLevel = task.priorityLevel?.priorityLevelId!!
+            )
+            mapedTasks.add(taskDto)
+        }
+
+        return mapedTasks
+
+    }
+
 }
