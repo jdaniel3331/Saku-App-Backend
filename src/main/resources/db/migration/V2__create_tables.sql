@@ -65,7 +65,7 @@ CREATE TABLE task.priority_levels (
 
 -- Tabla de estados de tareas
 CREATE TABLE task.task_states (
-    task_id SMALLSERIAL PRIMARY KEY,
+    task_state_id SMALLSERIAL PRIMARY KEY,
     state VARCHAR(255) NOT NULL
 );
 
@@ -88,6 +88,6 @@ CREATE TABLE task.tasks (
         REFERENCES authentication.users_info(user_id)
         ON DELETE CASCADE,
     FOREIGN KEY (category) REFERENCES task.categories(category_id) ON DELETE RESTRICT,
-    FOREIGN KEY (task_state) REFERENCES task.task_states(task_id) ON DELETE CASCADE,
+    FOREIGN KEY (task_state) REFERENCES task.task_states(task_state_id) ON DELETE CASCADE,
     FOREIGN KEY (priority_level) REFERENCES task.priority_levels(priority_level_id) ON DELETE CASCADE
 );
