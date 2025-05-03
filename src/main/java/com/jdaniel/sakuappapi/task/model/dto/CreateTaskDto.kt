@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
 import java.time.LocalDate
 
-data class TaskDto(
+data class CreateTaskDto(
     @NotNull
     @NotBlank
     val title: String,
