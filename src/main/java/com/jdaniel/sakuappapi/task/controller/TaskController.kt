@@ -9,6 +9,7 @@ import jakarta.validation.Valid
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -40,6 +41,16 @@ class TaskController {
             "Tasks retrieved successfully",
             HttpStatus.OK.value(),
             tasks
+        )
+        return ResponseEntity(response, HttpStatus.OK)
+    }
+    @DeleteMapping
+    public fun deleteTask(@RequestParam("taskId") taskId: Long): ResponseEntity<ApiResponse<String>> {
+
+        val response = ApiResponse<String>(
+            HttpStatus.OK.name,
+            taskService?.deteleTask(taskId),
+            HttpStatus.OK.value()
         )
         return ResponseEntity(response, HttpStatus.OK)
     }
