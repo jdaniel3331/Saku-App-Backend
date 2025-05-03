@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import java.time.LocalDate
 
 data class TaskDto(
-    @JsonProperty("user_id")
+    @JsonProperty("task_id")
     val taskId: Long,
     val title: String,
     val description: String?,
