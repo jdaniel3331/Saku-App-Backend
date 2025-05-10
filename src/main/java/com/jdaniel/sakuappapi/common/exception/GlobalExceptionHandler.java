@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(value = RequestException.class)
-    public ResponseEntity<ApiResponse> handleRequestException(RequestException e) {
-        ApiResponse response = new ApiResponse(e.getStatus(), e.getMessage(), e.getCode());
+    public ResponseEntity<ApiResponse<Object>> handleRequestException(RequestException e) {
+        ApiResponse<Object> response = new ApiResponse<>(e.getStatus(), e.getMessage(), e.getCode());
         return new ResponseEntity<>(response, HttpStatus.valueOf(e.getCode()));
     }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public ResponseEntity<ApiResponse> handleInvalidJsonException(MethodArgumentNotValidException ex) {
-        ApiResponse error = new ApiResponse(HttpStatus.BAD_REQUEST.name(), ex.getMessage(), HttpStatus.BAD_REQUEST.value());
+    public ResponseEntity<ApiResponse<Object>> handleInvalidJsonException(MethodArgumentNotValidException ex) {
+        ApiResponse<Object> error = new ApiResponse<>(HttpStatus.BAD_REQUEST.name(), ex.getMessage(), HttpStatus.BAD_REQUEST.value());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
     @ExceptionHandler(value = NotFoundedException.class)
-    public ResponseEntity<ApiResponse> handleNotFoundedException(NotFoundedException e) {
-        ApiResponse response = new ApiResponse(e.getStatus(), e.getMessage(), e.getCode());
+    public ResponseEntity<ApiResponse<Object>> handleNotFoundedException(NotFoundedException e) {
+        ApiResponse<Object> response = new ApiResponse<>(e.getStatus(), e.getMessage(), e.getCode());
         return new ResponseEntity<>(response, HttpStatus.valueOf(e.getCode()));
     }
 }
