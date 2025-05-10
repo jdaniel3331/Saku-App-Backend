@@ -30,10 +30,10 @@ class TaskServiceImpl: TaskService {
     override fun createTask(task: CreateTaskDto): String {
 
         val priorityLevel = priorityLevelRepository?.findById(task.priorityLevel)?.orElse(null)
-        if (priorityLevel == null) throw NotFoundedException("Priority level not found", HttpStatus.NOT_FOUND.name,HttpStatus.NOT_FOUND.value())
+        if (priorityLevel == null) throw NotFoundedException("Priority level not found", HttpStatus.NOT_FOUND.name)
 
         val user = userRepository?.findById(task.userId)?.orElse(null)
-        if (user == null) throw NotFoundedException("User not found", HttpStatus.NOT_FOUND.name,HttpStatus.NOT_FOUND.value())
+        if (user == null) throw NotFoundedException("User not found", HttpStatus.NOT_FOUND.name)
 
         val newTask = Task()
         newTask.title = task.title
@@ -53,10 +53,10 @@ class TaskServiceImpl: TaskService {
     override fun getAllTasks(userId: Long): List<TaskDto> {
         val mapedTasks = mutableListOf<TaskDto>()
         val user = userRepository?.findById(userId)?.orElse(null)
-        if (user == null) throw NotFoundedException("User not found", HttpStatus.NOT_FOUND.name,HttpStatus.NOT_FOUND.value())
+        if (user == null) throw NotFoundedException("User not found", HttpStatus.NOT_FOUND.name)
 
         val tasks = taskRepository?.getTasksByUser(user)
-        if (tasks.isNullOrEmpty()) throw NotFoundedException("User has no tasks", HttpStatus.NOT_FOUND.name,HttpStatus.NOT_FOUND.value())
+        if (tasks.isNullOrEmpty()) throw NotFoundedException("User has no tasks", HttpStatus.NOT_FOUND.name)
 
         for (task in tasks) {
             val taskDto = TaskDto(
@@ -78,7 +78,7 @@ class TaskServiceImpl: TaskService {
 
     override fun deleteTask(taskId: Long): String {
         val isTaskPresent = taskRepository?.existsByTaskId(taskId)
-        if (isTaskPresent == false) throw NotFoundedException("Task not found", HttpStatus.NOT_FOUND.name,HttpStatus.NOT_FOUND.value())
+        if (isTaskPresent == false) throw NotFoundedException("Task not found", HttpStatus.NOT_FOUND.name)
 
         taskRepository?.deleteByTaskId(taskId)
 
@@ -88,7 +88,7 @@ class TaskServiceImpl: TaskService {
 
     override fun changeTaskTitle(taskId: Long, newTitle: String): String {
         val isTaskPresent = taskRepository?.existsByTaskId(taskId)
-        if (isTaskPresent == false) throw NotFoundedException("Task not found", HttpStatus.NOT_FOUND.name,HttpStatus.NOT_FOUND.value())
+        if (isTaskPresent == false) throw NotFoundedException("Task not found", HttpStatus.NOT_FOUND.name)
 
         taskRepository?.updateTitleByTaskId(newTitle, taskId)
 
