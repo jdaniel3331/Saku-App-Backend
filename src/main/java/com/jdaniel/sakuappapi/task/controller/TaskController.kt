@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -24,10 +25,8 @@ class TaskController {
     @Autowired
     private val taskService: TaskService? = null
 
-    //TODO: verificar cumplimiento de principios REST
-
     @PostMapping
-    public fun createTask(@RequestBody @Valid task: CreateTaskDto): ResponseEntity<ApiResponse<String>> {
+    fun createTask(@RequestBody @Valid task: CreateTaskDto): ResponseEntity<ApiResponse<String>> {
         val message = taskService?.createTask(task)
         val response = ApiResponse<String>(
             HttpStatus.CREATED.name,
@@ -37,7 +36,7 @@ class TaskController {
         return ResponseEntity(response, HttpStatus.CREATED)
     }
     @GetMapping
-    public fun getAllTasks(@RequestParam("userId") userId: Long): ResponseEntity<ApiResponse<List<TaskDto>>> {
+    fun getAllTasks(@RequestParam("userId") userId: Long): ResponseEntity<ApiResponse<List<TaskDto>>> {
         val tasks = taskService?.getAllTasks(userId)
         val response = ApiResponse<List<TaskDto>>(
             HttpStatus.OK.name,
@@ -47,8 +46,8 @@ class TaskController {
         )
         return ResponseEntity(response, HttpStatus.OK)
     }
-    @DeleteMapping
-    public fun deleteTask(@RequestParam("taskId") taskId: Long): ResponseEntity<ApiResponse<String>> {
+    @DeleteMapping("/{taskId}")
+    fun deleteTask(@PathVariable taskId: Long): ResponseEntity<ApiResponse<String>> {
 
         val response = ApiResponse<String>(
             HttpStatus.OK.name,
@@ -58,7 +57,7 @@ class TaskController {
         return ResponseEntity(response, HttpStatus.OK)
     }
     @PatchMapping
-    public fun changeTaskTitle(@RequestBody @Valid changeTitleDto: ChangeTitleDto): ResponseEntity<ApiResponse<String>> {
+    fun changeTaskTitle(@RequestBody @Valid changeTitleDto: ChangeTitleDto): ResponseEntity<ApiResponse<String>> {
         val response = ApiResponse<String>(
             HttpStatus.OK.name,
             taskService?.changeTaskTitle(changeTitleDto.taskId, changeTitleDto.newTitle),
