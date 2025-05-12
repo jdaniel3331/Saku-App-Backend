@@ -38,16 +38,16 @@ class TaskServiceImpl: TaskService {
         val newTask = Task()
         newTask.title = task.title
         newTask.description = task.description
-        newTask.dueDate = task.dueDate
+        newTask.dueDate = null
         newTask.cratedAt = LocalDate.now()
         newTask.category = task.category.let { categoryRepository?.findById(it)?.orElse(null) }
         newTask.priorityLevel = priorityLevel
         newTask.taskState = taskStateRepository?.findById(1)?.orElse(null)
         newTask.user = user
 
-        val savedTask: Task? = taskRepository?.save(newTask)
+        taskRepository?.save(newTask)
 
-        return "Task ${savedTask?.title} created successfully"
+        return "Task created successfully"
     }
 
     override fun getAllTasks(userId: Long): List<TaskDto> {

@@ -10,9 +10,8 @@ data class CreateTaskDto(
     @NotBlank
     val title: String,
     val description: String,
-    @NotNull
     @JsonProperty("due_date")
-    val dueDate: LocalDate,
+    val dueDate: LocalDate?,
     val category: Long,
     @JsonProperty("priority_level")
     val priorityLevel: Short,
