@@ -75,7 +75,25 @@ class TaskController {
             HttpStatus.OK.value(),
             task
         )
+        return ResponseEntity(response, HttpStatus.OK)
+    }
 
+    @PatchMapping("/{taskId}/states/{stateId}")
+    fun changeTaskState(@PathVariable taskId: Long, @PathVariable stateId: Short): ResponseEntity<ApiResponse<String>>{
+        val response = ApiResponse<String>(
+            HttpStatus.OK.name,
+            taskService?.changeTaskState(taskId, stateId),
+            HttpStatus.OK.value()
+        )
+        return ResponseEntity(response, HttpStatus.OK)
+    }
+    @PatchMapping("/{taskId}/priority/{priorityLevelId}")
+    fun changeTaskPriorityLevel(@PathVariable taskId: Long, @PathVariable priorityLevelId: Short): ResponseEntity<ApiResponse<String>>{
+        val response = ApiResponse<String>(
+            HttpStatus.OK.name,
+            taskService?.changeTaskPriorityLevel(taskId, priorityLevelId),
+            HttpStatus.OK.value()
+        )
         return ResponseEntity(response, HttpStatus.OK)
     }
 }
