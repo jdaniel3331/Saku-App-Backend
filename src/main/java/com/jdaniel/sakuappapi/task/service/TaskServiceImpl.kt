@@ -94,4 +94,20 @@ class TaskServiceImpl: TaskService {
 
         return "Task title updated successfully"
     }
+
+    override fun getTaskById(taskId: Long): TaskDto {
+        val task = taskRepository?.findFirstByTaskId(taskId)
+        if (task == null) throw NotFoundedException("Task not found", HttpStatus.NOT_FOUND.name)
+
+        return TaskDto(
+            taskId = task.taskId!!,
+            title = task.title!!,
+            description = task.description?: "",
+            createdAt = task.cratedAt!!,
+            dueDate = task.dueDate,
+            category = task.category?.categoryId,
+            taskState = task.taskState?.taskStateId!!,
+            priorityLevel = task.priorityLevel?.priorityLevelId!!
+        )
+    }
 }

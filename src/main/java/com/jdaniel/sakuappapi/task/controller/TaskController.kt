@@ -65,4 +65,17 @@ class TaskController {
         )
         return ResponseEntity(response, HttpStatus.OK)
     }
+    @GetMapping("/{taskId}")
+    fun getTask(@PathVariable taskId: Long): ResponseEntity<ApiResponse<TaskDto>>{
+        val task = taskService?.getTaskById(taskId)
+
+        val response = ApiResponse<TaskDto>(
+            HttpStatus.OK.name,
+            "Task retrieved successfully",
+            HttpStatus.OK.value(),
+            task
+        )
+
+        return ResponseEntity(response, HttpStatus.OK)
+    }
 }

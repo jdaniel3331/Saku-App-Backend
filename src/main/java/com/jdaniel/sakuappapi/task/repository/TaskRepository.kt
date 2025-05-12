@@ -21,4 +21,7 @@ interface TaskRepository: JpaRepository<Task, Long> {
     @Modifying
     @Query("UPDATE Task t SET t.title = ?1 WHERE t.taskId = ?2")
     fun updateTitleByTaskId(title: String, taskId: Long)
+
+
+    fun findFirstByTaskId(taskId: Long): Task?
 }
