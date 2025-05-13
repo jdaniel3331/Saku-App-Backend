@@ -127,6 +127,13 @@ class TaskServiceImpl: TaskService {
         return "Task priority level updated successfully"
     }
 
+    override fun changeTaskDescription(taskId: Long, newDescription: String): String {
+        verifyTaskExistence(taskId)
+        taskRepository?.updateTaskDescription(newDescription, taskId)
+
+        return "Task description updated successfully"
+    }
+
     private fun verifyTaskExistence(taskId: Long) {
         if (taskRepository?.existsByTaskId(taskId) != true) throw NotFoundedException("Task not found", HttpStatus.NOT_FOUND.name)
     }

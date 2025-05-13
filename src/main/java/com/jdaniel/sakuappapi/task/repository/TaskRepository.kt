@@ -35,4 +35,10 @@ interface TaskRepository: JpaRepository<Task, Long> {
     @Modifying
     @Query("update Task t set t.priorityLevel = ?1 where t.taskId = ?2")
     fun updatePriorityLevel(priorityLevel: PriorityLevel, taskId: Long)
+
+
+    @Transactional
+    @Modifying
+    @Query("update Task t set t.description = ?1 where t.taskId = ?2")
+    fun updateTaskDescription(description: String, taskId: Long)
 }

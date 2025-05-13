@@ -1,6 +1,7 @@
 package com.jdaniel.sakuappapi.task.controller
 
 import com.jdaniel.sakuappapi.common.response.ApiResponse
+import com.jdaniel.sakuappapi.task.model.dto.ChangeDescriptionDto
 import com.jdaniel.sakuappapi.task.model.dto.ChangeTitleDto
 import com.jdaniel.sakuappapi.task.model.dto.CreateTaskDto
 import com.jdaniel.sakuappapi.task.model.dto.TaskDto
@@ -92,6 +93,15 @@ class TaskController {
         val response = ApiResponse<String>(
             HttpStatus.OK.name,
             taskService?.changeTaskPriorityLevel(taskId, priorityLevelId),
+            HttpStatus.OK.value()
+        )
+        return ResponseEntity(response, HttpStatus.OK)
+    }
+    @PatchMapping("/{taskId}")
+    fun changeTaskDescription(@PathVariable taskId: Long, @RequestBody newDescription: ChangeDescriptionDto): ResponseEntity<ApiResponse<String>>{
+        val response = ApiResponse<String>(
+            HttpStatus.OK.name,
+            taskService?.changeTaskDescription(taskId, newDescription.newDescription),
             HttpStatus.OK.value()
         )
         return ResponseEntity(response, HttpStatus.OK)

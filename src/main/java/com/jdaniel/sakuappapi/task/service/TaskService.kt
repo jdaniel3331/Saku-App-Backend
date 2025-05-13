@@ -12,5 +12,6 @@ interface TaskService {
     fun getTaskById(taskId: Long): TaskDto
     fun changeTaskState(taskId: Long, taskStateId: Short): String
     fun changeTaskPriorityLevel(taskId: Long, priorityLevelId: Short): String
+    fun changeTaskDescription(taskId: Long, newDescription: String): String
 
 }
