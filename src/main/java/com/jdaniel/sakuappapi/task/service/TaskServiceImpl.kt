@@ -77,18 +77,16 @@ class TaskServiceImpl: TaskService {
     }
 
     override fun deleteTask(taskId: Long): String {
-        if (taskRepository?.existsByTaskId(taskId) != true) throw NotFoundedException("Task not found", HttpStatus.NOT_FOUND.name)
-
-        taskRepository.deleteByTaskId(taskId)
+        verifyTaskExistence(taskId)
+        taskRepository?.deleteByTaskId(taskId)
 
         return "Task deleted successfully"
 
     }
 
     override fun changeTaskTitle(taskId: Long, newTitle: String): String {
-        if (taskRepository?.existsByTaskId(taskId) != true) throw NotFoundedException("Task not found", HttpStatus.NOT_FOUND.name)
-
-        taskRepository.updateTitleByTaskId(newTitle, taskId)
+        verifyTaskExistence(taskId)
+        taskRepository?.updateTitleByTaskId(newTitle, taskId)
 
         return "Task title updated successfully"
     }
@@ -110,25 +108,26 @@ class TaskServiceImpl: TaskService {
     }
 
     override fun changeTaskState(taskId: Long, taskStateId: Short): String {
-        if (taskRepository?.existsByTaskId(taskId) != true) throw NotFoundedException("Task not found", HttpStatus.NOT_FOUND.name)
+        verifyTaskExistence(taskId)
         val taskState = taskStateRepository?.findById(taskStateId)?.orElseThrow{
             NotFoundedException("Task state not found", HttpStatus.NOT_FOUND.name)
         }
-
-        taskRepository.updateTaskState(taskState!!, taskId)
+        taskRepository?.updateTaskState(taskState!!, taskId)
 
         return "Task state updated successfully"
     }
 
     override fun changeTaskPriorityLevel(taskId: Long, priorityLevelId: Short): String {
-        if (taskRepository?.existsByTaskId(taskId) != true) throw NotFoundedException("Task not found", HttpStatus.NOT_FOUND.name)
+        verifyTaskExistence(taskId)
         val priorityLevel = priorityLevelRepository?.findById(priorityLevelId)?.orElseThrow{
             NotFoundedException("Priority level not found", HttpStatus.NOT_FOUND.name)
         }
-
-        taskRepository.updatePriorityLevel(priorityLevel!!, taskId)
+        taskRepository?.updatePriorityLevel(priorityLevel!!, taskId)
 
         return "Task priority level updated successfully"
     }
 
+    private fun verifyTaskExistence(taskId: Long) {
+        if (taskRepository?.existsByTaskId(taskId) != true) throw NotFoundedException("Task not found", HttpStatus.NOT_FOUND.name)
+    }
 }
