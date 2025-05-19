@@ -77,6 +77,6 @@ public class ApiSecurityConfig {
     }
     @Bean
     public CustomUserDetailsService userDetailsService() {
-        return new CustomUserDetailsService();
+        return userDetailsService;
     }
 }
