@@ -30,4 +30,9 @@ public class AccessTokenServiceImpl implements AccessTokenService{
 
         return accessTokenRepository.save(accessToken);
     }
+
+    @Override
+    public void invalidateTokens(String email) {
+        accessTokenRepository.invalidateTokensByUserEmail(email);
+    }
 }

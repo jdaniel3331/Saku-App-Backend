@@ -8,4 +8,5 @@ public interface AccessTokenService {
 
     String createToken(Authentication auth);
     AccessToken saveToken(String token, User user);
+    void invalidateTokens(String email);
 }

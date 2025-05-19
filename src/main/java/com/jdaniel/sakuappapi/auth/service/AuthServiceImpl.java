@@ -67,6 +67,8 @@ public class AuthServiceImpl implements AuthService {
         Authentication authentication = authenticateUser(email, password);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
+        accessTokenService.invalidateTokens(email);
+
          AccessToken newToken = accessTokenService.saveToken(accessTokenService.createToken(authentication),
                 userRepository.getUserByEmailIgnoreCase(email)
                         .orElseThrow(
