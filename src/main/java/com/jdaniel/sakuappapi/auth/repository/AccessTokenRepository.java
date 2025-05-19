@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface AccessTokenRepository extends JpaRepository<AccessToken, Long> {
 
+    Optional<AccessToken> findByAccessTokenIgnoreCase(String accessToken);
 }
