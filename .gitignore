@@ -41,7 +41,7 @@ out/
 
 #Environment variable files
 .env
-*.properties
+src/main/resources/application.properties
 *.yaml
 *.yml
 
