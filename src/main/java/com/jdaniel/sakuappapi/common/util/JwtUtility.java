@@ -5,6 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.jdaniel.sakuappapi.auth.model.dto.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -23,13 +24,15 @@ public class JwtUtility {
 
     public String generateToken(Authentication authentication){
         Algorithm algorithm = Algorithm.HMAC256(this.secret);
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         String email = authentication.getPrincipal().toString();
 
         return JWT
                 .create()
                 .withIssuer(this.issuer)
                 .withSubject(email)
-                .withClaim("email", email)
+                .withClaim("email", userDetails.getUsername())
+                .withClaim("user_id", userDetails.getUserId())
                 .withIssuedAt(new Date())
                 .withExpiresAt(new Date(System.currentTimeMillis() + (1000 * expirationTime)))
                 .withNotBefore(new Date(System.currentTimeMillis()))

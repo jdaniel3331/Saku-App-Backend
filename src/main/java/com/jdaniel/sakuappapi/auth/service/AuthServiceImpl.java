@@ -88,6 +88,6 @@ public class AuthServiceImpl implements AuthService {
             throw new RequestException(HttpStatus.BAD_REQUEST.name(), "Contraseña incorrecta",HttpStatus.BAD_REQUEST.value());
         }
 
-        return new UsernamePasswordAuthenticationToken(email, userDetails.getPassword(), userDetails.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }
 }

@@ -46,7 +46,7 @@ public class ApiSecurityConfig {
                         .requestMatchers(HttpMethod.DELETE,"/tasks/{taskId}").authenticated()
                         .requestMatchers(HttpMethod.PATCH,"/tasks/**").authenticated()
                         .requestMatchers(HttpMethod.POST,"/auth/log-out").authenticated()
-                        .anyRequest().denyAll()
+                        .anyRequest().permitAll()
                 )
                 //.httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session

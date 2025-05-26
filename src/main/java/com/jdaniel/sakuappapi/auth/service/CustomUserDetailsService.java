@@ -1,6 +1,7 @@
 package com.jdaniel.sakuappapi.auth.service;
 
 import com.jdaniel.sakuappapi.auth.model.UserCredential;
+import com.jdaniel.sakuappapi.auth.model.dto.CustomUserDetails;
 import com.jdaniel.sakuappapi.auth.repository.UserCredentialRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,15 +24,12 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .getUserCredentialByEmailIgnoreCase(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
 
-
+        Long userId = credential.getUser().getUserId();
         List<SimpleGrantedAuthority> authorities = Collections.emptyList();
-        return new User(
+        return new CustomUserDetails(
+                userId,
                 credential.getEmail(),
                 credential.getPassword(),
-                true,
-                true,
-                true,
-                true,
                 authorities
         );
     }
