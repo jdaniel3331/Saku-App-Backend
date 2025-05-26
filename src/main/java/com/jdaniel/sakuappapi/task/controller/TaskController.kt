@@ -1,5 +1,6 @@
 package com.jdaniel.sakuappapi.task.controller
 
+import com.jdaniel.sakuappapi.auth.model.dto.CustomUserDetails
 import com.jdaniel.sakuappapi.common.response.ApiResponse
 import com.jdaniel.sakuappapi.task.model.dto.ChangeDescriptionDto
 import com.jdaniel.sakuappapi.task.model.dto.ChangeTitleDto
@@ -10,6 +11,7 @@ import jakarta.validation.Valid
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
@@ -28,6 +30,9 @@ class TaskController {
 
     @PostMapping
     fun createTask(@RequestBody @Valid task: CreateTaskDto): ResponseEntity<ApiResponse<String>> {
+        val auth = SecurityContextHolder.getContext().authentication
+        val userDetails = auth.principal as CustomUserDetails
+        task.userId = userDetails.userId
         val message = taskService?.createTask(task)
         val response = ApiResponse<String>(
             HttpStatus.CREATED.name,
@@ -37,8 +42,8 @@ class TaskController {
         return ResponseEntity(response, HttpStatus.CREATED)
     }
     @GetMapping
-    fun getAllTasks(@RequestParam("userId") userId: Long): ResponseEntity<ApiResponse<List<TaskDto>>> {
-        val tasks = taskService?.getAllTasks(userId)
+    fun getAllTasks(): ResponseEntity<ApiResponse<List<TaskDto>>> {
+        val tasks = taskService?.getAllTasks(getUserIdFromToken())
         val response = ApiResponse<List<TaskDto>>(
             HttpStatus.OK.name,
             "Tasks retrieved successfully",
@@ -105,5 +110,11 @@ class TaskController {
             HttpStatus.OK.value()
         )
         return ResponseEntity(response, HttpStatus.OK)
+    }
+
+    fun getUserIdFromToken():Long{
+        val auth = SecurityContextHolder.getContext().authentication
+        val userDetails = auth.principal as CustomUserDetails
+        return userDetails.userId
     }
 }

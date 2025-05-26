@@ -3,6 +3,7 @@ package com.jdaniel.sakuappapi.common.security.filter;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.jdaniel.sakuappapi.auth.model.AccessToken;
+import com.jdaniel.sakuappapi.auth.model.dto.CustomUserDetails;
 import com.jdaniel.sakuappapi.auth.repository.AccessTokenRepository;
 import com.jdaniel.sakuappapi.common.util.JwtUtility;
 import jakarta.servlet.FilterChain;
@@ -52,8 +53,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 DecodedJWT decodedToken = jwtUtility.validateToken(token);
                 String email = decodedToken.getClaim("email").asString();
+                Long userId = decodedToken.getClaim("user_id").asLong();
 
-                Authentication auth = new UsernamePasswordAuthenticationToken(email, null, null);
+                CustomUserDetails userDetails = new CustomUserDetails(userId, email, null, null);
+
+                Authentication auth = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 SecurityContext securityContext = SecurityContextHolder.getContext();
 
                 securityContext.setAuthentication(auth);
