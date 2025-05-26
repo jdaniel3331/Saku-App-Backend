@@ -30,7 +30,7 @@ public class JwtUtility {
         return JWT
                 .create()
                 .withIssuer(this.issuer)
-                .withSubject(email)
+                .withSubject(userDetails.getUsername())
                 .withClaim("email", userDetails.getUsername())
                 .withClaim("user_id", userDetails.getUserId())
                 .withIssuedAt(new Date())
