@@ -4,16 +4,19 @@ import com.jdaniel.sakuappapi.auth.model.AccessToken;
 import com.jdaniel.sakuappapi.auth.repository.AccessTokenRepository;
 import com.jdaniel.sakuappapi.common.util.JwtUtility;
 import com.jdaniel.sakuappapi.user.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AccessTokenServiceImpl implements AccessTokenService{
-    @Autowired
-    private JwtUtility jwtUtility;
-    @Autowired
-    private AccessTokenRepository accessTokenRepository;
+
+    private final JwtUtility jwtUtility;
+    private final AccessTokenRepository accessTokenRepository;
+
+    public AccessTokenServiceImpl(JwtUtility jwtUtility, AccessTokenRepository accessTokenRepository) {
+        this.jwtUtility = jwtUtility;
+        this.accessTokenRepository = accessTokenRepository;
+    }
 
     @Override
     public String createToken(Authentication auth) {

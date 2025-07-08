@@ -8,7 +8,6 @@ import com.jdaniel.sakuappapi.auth.model.dto.RegisterRequest;
 import com.jdaniel.sakuappapi.auth.repository.UserCredentialRepository;
 import com.jdaniel.sakuappapi.user.repository.UserRepository;
 import com.jdaniel.sakuappapi.common.exception.RequestException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,16 +20,24 @@ import java.time.LocalDate;
 
 @Service
 public class AuthServiceImpl implements AuthService {
-    @Autowired
-    private UserCredentialRepository userCredentialRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
-    private CustomUserDetailsService customUserDetailsService;
-    @Autowired
-    private AccessTokenServiceImpl accessTokenService;
+
+    private final UserCredentialRepository userCredentialRepository;
+
+    private final UserRepository userRepository;
+
+    private final PasswordEncoder passwordEncoder;
+
+    private final CustomUserDetailsService customUserDetailsService;
+
+    private final AccessTokenService accessTokenService;
+
+    public AuthServiceImpl(UserCredentialRepository userCredentialRepository, UserRepository userRepository, PasswordEncoder passwordEncoder, CustomUserDetailsService customUserDetailsService, AccessTokenService accessTokenService) {
+        this.userCredentialRepository = userCredentialRepository;
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.customUserDetailsService = customUserDetailsService;
+        this.accessTokenService = accessTokenService;
+    }
 
     @Override
     public String register(RegisterRequest registerRequest) {

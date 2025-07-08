@@ -3,7 +3,6 @@ package com.jdaniel.sakuappapi.auth.service;
 import com.jdaniel.sakuappapi.auth.repository.AccessTokenRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
@@ -13,8 +12,12 @@ import java.io.IOException;
 
 @Component
 public class LogOutService implements LogoutHandler {
-    @Autowired
-    private AccessTokenRepository accessTokenRepository;
+
+    public LogOutService(AccessTokenRepository accessTokenRepository) {
+        this.accessTokenRepository = accessTokenRepository;
+    }
+
+    private final AccessTokenRepository accessTokenRepository;
 
     @Override
     public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {

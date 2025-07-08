@@ -39,7 +39,7 @@ class TaskServiceImpl: TaskService {
         newTask.title = task.title
         newTask.description = task.description
         newTask.dueDate = null
-        newTask.cratedAt = LocalDate.now()
+        newTask.createdAt = LocalDate.now()
         newTask.category = task.category.let { categoryRepository?.findById(it)?.orElse(null) }
         newTask.priorityLevel = priorityLevel
         newTask.taskState = taskStateRepository?.findById(1)?.orElse(null)
@@ -63,7 +63,7 @@ class TaskServiceImpl: TaskService {
                 taskId = task.taskId!!,
                 title = task.title!!,
                 description = task.description?: "",
-                createdAt = task.cratedAt!!,
+                createdAt = task.createdAt!!,
                 dueDate = task.dueDate,
                 category = task.category?.categoryId,
                 taskState = task.taskState?.taskStateId!!,
@@ -77,6 +77,7 @@ class TaskServiceImpl: TaskService {
     }
 
     override fun deleteTask(taskId: Long): String {
+        //TODO: borrar solo para el usuario, no de la base de datos
         verifyTaskExistence(taskId)
         taskRepository?.deleteByTaskId(taskId)
 
@@ -99,7 +100,7 @@ class TaskServiceImpl: TaskService {
             taskId = task.taskId!!,
             title = task.title!!,
             description = task.description?: "",
-            createdAt = task.cratedAt!!,
+            createdAt = task.createdAt!!,
             dueDate = task.dueDate,
             category = task.category?.categoryId,
             taskState = task.taskState?.taskStateId!!,
