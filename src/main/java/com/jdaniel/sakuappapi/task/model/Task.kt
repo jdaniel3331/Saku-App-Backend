@@ -3,6 +3,7 @@ package com.jdaniel.sakuappapi.task.model
 import com.jdaniel.sakuappapi.user.model.User
 import jakarta.persistence.*
 import java.time.LocalDate
+import java.time.OffsetDateTime
 
 @Entity
 @Table(name = "tasks", schema = "task")
@@ -19,10 +20,16 @@ class Task() {
     var description: String? = null
 
     @Column(name = "created_at", nullable = false)
-    var cratedAt: LocalDate? = null
+    var createdAt: LocalDate? = null
 
     @Column(name = "due_date")
     var dueDate: LocalDate? = null
+
+    @Column(name = "was_deleted")
+    var wasDeleted: Boolean? = null
+
+    @Column(name = "deleted_at")
+    var deletedAt: OffsetDateTime? = null
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category")
